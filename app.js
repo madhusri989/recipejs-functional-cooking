@@ -1,37 +1,132 @@
-// Recipe data
+// ⭐ Recipe data (new set)
 const recipes = [
-    { id:1,title:"Classic Spaghetti Carbonara",time:25,difficulty:"easy",description:"A creamy Italian pasta dish made with eggs, cheese, pancetta, and black pepper.",category:"pasta"},
-    { id:2,title:"Chicken Tikka Masala",time:45,difficulty:"medium",description:"Tender chicken pieces in a creamy, spiced tomato sauce.",category:"curry"},
-    { id:3,title:"Homemade Croissants",time:180,difficulty:"hard",description:"Buttery, flaky French pastries that require patience but deliver amazing results.",category:"baking"},
-    { id:4,title:"Greek Salad",time:15,difficulty:"easy",description:"Fresh vegetables, feta cheese, and olives tossed in olive oil and herbs.",category:"salad"},
-    { id:5,title:"Beef Wellington",time:120,difficulty:"hard",description:"Tender beef fillet coated with mushroom duxelles and wrapped in puff pastry.",category:"meat"},
-    { id:6,title:"Vegetable Stir Fry",time:20,difficulty:"easy",description:"Colorful mixed vegetables cooked quickly in a savory sauce.",category:"vegetarian"},
-    { id:7,title:"Pad Thai",time:30,difficulty:"medium",description:"Thai stir-fried rice noodles with shrimp, peanuts, and tangy tamarind sauce.",category:"noodles"},
-    { id:8,title:"Margherita Pizza",time:60,difficulty:"medium",description:"Classic Italian pizza with fresh mozzarella, tomatoes, and basil.",category:"pizza"}
+{
+id:1,
+title:"Paneer Butter Masala",
+time:35,
+difficulty:"medium",
+rating:4.7,
+image:"https://source.unsplash.com/400x300/?paneer",
+category:"curry",
+description:"Creamy tomato based paneer curry loved across India."
+},
+{
+id:2,
+title:"Avocado Toast",
+time:10,
+difficulty:"easy",
+rating:4.3,
+image:"https://source.unsplash.com/400x300/?avocado-toast",
+category:"breakfast",
+description:"Healthy smashed avocado on toasted bread."
+},
+{
+id:3,
+title:"Chocolate Lava Cake",
+time:40,
+difficulty:"hard",
+rating:4.9,
+image:"https://source.unsplash.com/400x300/?lava-cake",
+category:"dessert",
+description:"Rich chocolate cake with molten center."
+},
+{
+id:4,
+title:"Veg Fried Rice",
+time:20,
+difficulty:"easy",
+rating:4.4,
+image:"https://source.unsplash.com/400x300/?fried-rice",
+category:"rice",
+description:"Quick stir fried rice with vegetables."
+},
+{
+id:5,
+title:"Butter Chicken",
+time:50,
+difficulty:"medium",
+rating:4.8,
+image:"https://source.unsplash.com/400x300/?butter-chicken",
+category:"curry",
+description:"Classic creamy chicken curry."
+},
+{
+id:6,
+title:"Tacos",
+time:25,
+difficulty:"easy",
+rating:4.2,
+image:"https://source.unsplash.com/400x300/?tacos",
+category:"mexican",
+description:"Mexican tortillas filled with veggies & sauce."
+},
+{
+id:7,
+title:"Lasagna",
+time:90,
+difficulty:"hard",
+rating:4.6,
+image:"https://source.unsplash.com/400x300/?lasagna",
+category:"pasta",
+description:"Layered pasta with cheese and meat sauce."
+},
+{
+id:8,
+title:"Smoothie Bowl",
+time:15,
+difficulty:"easy",
+rating:4.5,
+image:"https://source.unsplash.com/400x300/?smoothie-bowl",
+category:"healthy",
+description:"Fruit smoothie topped with nuts & berries."
+}
 ];
 
-// DOM selection
-const recipeContainer = document.querySelector('#recipe-container');
+// ⭐ DOM selection
+const container = document.querySelector("#recipe-container");
 
-// create card
-const createRecipeCard = (recipe) => {
-    return `
-        <div class="recipe-card" data-id="${recipe.id}">
-            <h3>${recipe.title}</h3>
-            <div class="recipe-meta">
-                <span>⏱️ ${recipe.time} min</span>
-                <span class="difficulty ${recipe.difficulty}">${recipe.difficulty}</span>
-            </div>
-            <p>${recipe.description}</p>
-        </div>
-    `;
+// ⭐ emoji helper
+const getEmoji = (category)=>{
+const map={
+curry:"🍛",
+dessert:"🍰",
+breakfast:"🥑",
+rice:"🍚",
+mexican:"🌮",
+pasta:"🍝",
+healthy:"🥗"
+};
+return map[category] || "🍽️";
 };
 
-// render
-const renderRecipes = (recipesToRender) => {
-    const html = recipesToRender.map(createRecipeCard).join('');
-    recipeContainer.innerHTML = html;
+// ⭐ card creator
+const createCard = (recipe)=>{
+return `
+<div class="recipe-card">
+<img src="${recipe.image}" alt="${recipe.title}">
+<h3>${getEmoji(recipe.category)} ${recipe.title}</h3>
+
+<div class="recipe-meta">
+<span>⏱ ${recipe.time} min</span>
+<span class="difficulty ${recipe.difficulty}">
+${recipe.difficulty}
+</span>
+</div>
+
+<p>${recipe.description}</p>
+<p>⭐ ${recipe.rating}</p>
+
+<button onclick="alert('Happy Cooking!')">
+Cook Now
+</button>
+</div>
+`;
 };
 
-// init
+// ⭐ render function
+const renderRecipes = (data)=>{
+container.innerHTML = data.map(createCard).join("");
+};
+
+// ⭐ init
 renderRecipes(recipes);
